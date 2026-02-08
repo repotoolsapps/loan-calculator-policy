@@ -3,216 +3,359 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Préstamos Pro - Profesional y Fácil</title>
-    <!-- Opción SEO -->
-    <meta name="description" content="La calculadora de préstamos e hipotecas más completa y profesional para Android e iOS.">
+    <title>Calculadora de Préstamos Pro - La Herramienta Definitiva</title>
     <style>
         :root {
             --primary: #1a73e8;
-            --primary-dark: #1765cc;
-            --secondary: #34a853;
+            --primary-dark: #1557b0;
+            --primary-light: #e8f0fe;
+            --accent: #fbbc04;
             --dark: #202124;
-            --light: #f8f9fa;
             --gray: #5f6368;
+            --light-gray: #f1f3f4;
             --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --radius-lg: 24px;
+            --radius-md: 16px;
         }
 
         * {
             box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             margin: 0;
-            padding: 0;
             color: var(--dark);
-            background-color: #ffffff;
+            background: #fafafa;
+            overflow-x: hidden;
             line-height: 1.6;
         }
 
-        /* Language Toggle */
-        .lang-switch {
-            background: #eee;
-            border-radius: 20px;
-            padding: 4px;
-            display: flex;
-            gap: 5px;
-            margin-left: 20px;
+        /* --- Animations --- */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .lang-btn {
-            background: none;
-            border: none;
-            padding: 5px 12px;
-            border-radius: 16px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: 600;
-            transition: all 0.3s;
+        .reveal {
+            animation: fadeInUp 0.8s ease-out forwards;
         }
 
-        .lang-btn.active {
-            background: var(--white);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            color: var(--primary);
-        }
-
+        /* --- Header & Nav --- */
         header {
-            padding: 15px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 2000;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 15px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .logo {
             display: flex;
             align-items: center;
-            font-weight: 700;
+            text-decoration: none;
+            font-weight: 800;
             font-size: 1.3rem;
             color: var(--primary);
-            text-decoration: none;
         }
 
         .logo img {
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
             margin-right: 12px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
+        .lang-switch {
+            background: var(--light-gray);
+            padding: 4px;
+            border-radius: 30px;
+            display: flex;
+            gap: 2px;
+        }
+
+        .lang-btn {
+            border: none;
+            background: none;
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .lang-btn.active {
+            background: var(--white);
+            color: var(--primary);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- Hero Section --- */
         .hero {
-            padding: 100px 5%;
+            padding: 120px 8% 80px;
             text-align: center;
-            background: radial-gradient(circle at top right, #e8f0fe, #ffffff);
+            background: radial-gradient(circle at 80% 20%, #e8f0fe 0%, #ffffff 50%);
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            margin-bottom: 20px;
-            letter-spacing: -1.5px;
-            line-height: 1.1;
+            font-size: clamp(2.8rem, 8vw, 4.5rem);
+            margin-bottom: 25px;
+            letter-spacing: -2px;
+            line-height: 1.05;
         }
 
         .hero p {
-            font-size: clamp(1.1rem, 3vw, 1.4rem);
-            max-width: 700px;
-            margin: 0 auto 40px;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            max-width: 800px;
+            margin: 0 auto 50px;
             color: var(--gray);
         }
 
-        /* Store Buttons */
-        .store-buttons {
+        .store-badges {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
             flex-wrap: wrap;
-            margin-bottom: 60px;
         }
 
-        .store-btn img {
-            height: 50px;
+        .store-badges img {
+            height: 55px;
             transition: transform 0.2s;
         }
 
-        .store-btn:hover img {
-            transform: translateY(-3px);
+        .store-badges img:hover {
+            transform: translateY(-4px);
         }
 
-        .section-title {
+        /* --- Section Titles --- */
+        .section-header {
             text-align: center;
-            font-size: 2.5rem;
-            margin: 100px 0 40px;
+            padding: 100px 8% 40px;
         }
 
-        /* App Mockups */
-        .mockups-container {
+        .section-header h2 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- Mockups Slider --- */
+        .mockups-slider {
             display: flex;
             overflow-x: auto;
-            gap: 30px;
-            padding: 40px 5%;
-            scroll-snap-type: x mandatory;
+            gap: 40px;
+            padding: 20px 8% 80px;
             scrollbar-width: none;
+            scroll-snap-type: x mandatory;
         }
 
-        .mockups-container::-webkit-scrollbar {
+        .mockups-slider::-webkit-scrollbar {
             display: none;
         }
 
-        .mockup {
+        .mockup-item {
             flex: 0 0 auto;
-            width: 280px;
-            border-radius: 35px;
-            border: 10px solid #111;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            width: 300px;
             scroll-snap-align: center;
+            border: 10px solid #202124;
+            border-radius: 45px;
             overflow: hidden;
-            background: #eee;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+            background: #fff;
         }
 
-        .mockup img {
+        .mockup-item img {
             width: 100%;
+            height: auto;
             display: block;
         }
 
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            padding: 100px 5%;
-        }
-
-        .feature-card {
-            padding: 40px;
-            border-radius: 24px;
+        /* --- How It Works --- */
+        .steps {
             background: var(--white);
-            border: 1px solid #f0f0f0;
-            transition: 0.3s;
+            padding: 80px 8%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
         }
 
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
-            border-color: var(--primary);
+        .step-card {
+            text-align: left;
         }
 
-        .feature-card h3 {
+        .step-num {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--primary-light);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .step-card h3 {
             font-size: 1.6rem;
             margin-bottom: 15px;
+        }
+
+        .step-card p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        /* --- Comparison Table --- */
+        .plan-comparison {
+            padding: 80px 8%;
+            background: var(--light-gray);
+        }
+
+        .table-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th,
+        td {
+            padding: 25px;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background: #fafafa;
+            font-weight: 700;
+            color: var(--gray);
+        }
+
+        .check {
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .cross {
+            color: #d93025;
+            font-weight: bold;
+        }
+
+        /* --- Trust / Security --- */
+        .trust-section {
+            padding: 100px 8%;
+            text-align: center;
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .trust-item h4 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .trust-item p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* --- FAQ --- */
+        .faq {
+            padding: 100px 8%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--white);
+            margin-bottom: 15px;
+            border-radius: var(--radius-md);
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+
+        .faq-item h4 {
+            margin: 0 0 10px;
+            font-size: 1.25rem;
             color: var(--primary);
         }
 
+        /* --- Footer --- */
         footer {
             background: #111;
-            color: #ccc;
-            padding: 80px 5% 40px;
+            color: #888;
+            padding: 100px 8% 50px;
             text-align: center;
         }
 
-        .footer-links a {
-            color: #888;
-            margin: 0 15px;
+        .footer-logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 30px;
+            display: block;
             text-decoration: none;
-            transition: color 0.2s;
         }
 
-        .footer-links a:hover {
+        .footer-nav {
+            margin-bottom: 50px;
+        }
+
+        .footer-nav a {
+            color: #888;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: 500;
+        }
+
+        .footer-nav a:hover {
             color: #fff;
         }
 
-        .copy {
-            margin-top: 40px;
-            font-size: 0.9rem;
-            color: #555;
+        .social-links {
+            margin-bottom: 40px;
+            font-size: 1.5rem;
         }
 
-        /* Multi-lang visibility */
+        .copy {
+            border-top: 1px solid #222;
+            padding-top: 30px;
+            font-size: 0.9rem;
+        }
+
+        /* --- Multilang Toggle System --- */
         [lang="en"] {
             display: none;
         }
@@ -225,44 +368,45 @@
             display: block;
         }
 
-        html.lang-es [lang="es"] {
-            display: block;
-        }
-
-        @media (max-width: 600px) {
-            .hero {
-                padding: 60px 20px;
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 5%;
             }
 
-            .section-title {
-                font-size: 1.8rem;
+            .hero h1 {
+                font-size: 2.5rem;
             }
 
-            .mockup {
-                width: 240px;
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+
+            .footer-nav a {
+                display: block;
+                margin: 15px 0;
             }
         }
     </style>
-    <script>
-        function setLang(lang) {
-            document.documentElement.className = 'lang-' + lang;
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.lang === lang);
-            });
-            localStorage.setItem('preferred-lang', lang);
-        }
-        // Auto detect or load saved
-        window.onload = () => {
-            const saved = localStorage.getItem('preferred-lang');
-            const browser = navigator.language.startsWith('es') ? 'es' : 'en';
-            setLang(saved || browser);
-        };
-    </script>
+<script>
+    function setLang(lang) {
+        document.documentElement.className = 'lang-' + lang;
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+        localStorage.setItem('pref-lang', lang);
+    }
+    window.onload = () => {
+        const saved = localStorage.getItem('pref-lang');
+        const browser = navigator.language.startsWith('es') ? 'es' : 'en';
+        setLang(saved || browser);
+    };
+</script>
 </head>
+
+
 <body>
+
     <header>
         <a href="#" class="logo">
-            <img src="img/icon.png" alt="Logo">
+            <img src="img/icon.png" alt="Icon">
             <span lang="es">Calculadora Pro</span>
             <span lang="en">Loan Calc Pro</span>
         </a>
@@ -273,69 +417,194 @@
     </header>
 
     <section class="hero">
-        <h1 lang="es">Finanzas claras,<br>decisiones inteligentes.</h1>
-        <h1 lang="en">Clear finances,<br>smart decisions.</h1>
+        <h1 lang="es">Paga menos,<br>decide mejor.</h1>
+        <h1 lang="en">Pay less,<br>decide better.</h1>
 
-        <p lang="es">La calculadora de préstamos definitiva. Amortización, comparación y exportación profesional en la palma de tu mano.</p>
-        <p lang="en">The ultimate loan calculator. Amortization, comparison, and professional export right in the palm of your hand.</p>
+        <p lang="es">Descubre la verdadera cuota de tu hipoteca o préstamo en segundos. La herramienta profesional que
+            los bancos no quieren que uses.</p>
+        <p lang="en">Discover the true cost of your mortgage or loan in seconds. The professional tool banks dont want
+            you to use.</p>
 
-        <div class="store-buttons">
-            <!-- Google Play -->
-            <a href="https://play.google.com/store/apps/details?id=com.repotools.prestamocalculadora" class="store-btn">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play">
-            </a>
-            <!-- App Store (Placeholder link if not available yet) -->
-            <a href="#" class="store-btn">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store">
-            </a>
+        <div class="store-badges">
+            <a href="https://play.google.com/store/apps/details?id=com.repotools.prestamocalculadora"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Android"></a>
+            <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="iOS"></a>
         </div>
     </section>
 
-    <h2 class="section-title">
-        <span lang="es">Experiencia Premium</span>
-        <span lang="en">Premium Experience</span>
-    </h2>
-
-    <div class="mockups-container">
-        <div class="mockup"><img src="img/screen1.png" alt="S1"></div>
-        <div class="mockup"><img src="img/screen2.png" alt="S2"></div>
-        <div class="mockup"><img src="img/screen3.png" alt="S3"></div>
-        <div class="mockup"><img src="img/screen4.png" alt="S4"></div>
+    <!-- App Showcase -->
+    <div class="section-header">
+        <h2 lang="es">Potencia en tu bolsillo</h2>
+        <h2 lang="en">Power in your pocket</h2>
+        <p lang="es">Interfaz premium diseñada para ofrecerte la máxima claridad financiera.</p>
+        <p lang="en">Premium interface designed to offer you maximum financial clarity.</p>
     </div>
 
-    <section class="features">
-        <div class="feature-card">
-            <h3 lang="es">📊 Detalle Total</h3>
-            <h3 lang="en">📊 Full Detail</h3>
-            <p lang="es">Visualiza tu tabla de amortización completa. Intereses, capital y seguros desglosados mes a mes.</p>
-            <p lang="en">Visualize your full amortization table. Interests, capital, and insurance broken down month by month.</p>
+    <div class="mockups-slider">
+        <div class="mockup-item"><img src="img/screen1.png" alt="S1"></div>
+        <div class="mockup-item"><img src="img/screen2.png" alt="S2"></div>
+        <div class="mockup-item"><img src="img/screen3.png" alt="S3"></div>
+        <div class="mockup-item"><img src="img/screen4.png" alt="S4"></div>
+    </div>
+
+    <!-- How it works -->
+    <section class="steps">
+        <div class="step-card">
+            <div class="step-num">01</div>
+            <h3 lang="es">Configura</h3>
+            <h3 lang="en">Configure</h3>
+            <p lang="es">Introduce el importe, el interés y el plazo. Soporta cuotas fijas, variables y amortizaciones
+                complejas.</p>
+            <p lang="en">Enter the amount, interest, and term. Supports fixed, variable, and complex amortization
+                schedules.</p>
         </div>
-        <div class="feature-card">
-            <h3 lang="es">⚖️ Comparador</h3>
-            <h3 lang="en">⚖️ Comparison</h3>
-            <p lang="es">¿Varios bancos ofreciendo? Compara sus términos y descubre cuál te ahorra más dinero real.</p>
-            <p lang="en">Multiple bank offers? Compare their terms and find out which one really saves you more money.</p>
+        <div class="step-card">
+            <div class="step-num">02</div>
+            <h3 lang="es">Analiza</h3>
+            <h3 lang="en">Analyze</h3>
+            <p lang="es">Visualiza gráficos interactivos y tablas mes a mes. Conoce exactamente cuánto pagas de
+                intereses.</p>
+            <p lang="en">View interactive charts and month-by-month tables. Know exactly how much interest you pay.</p>
         </div>
-        <div class="feature-card">
-            <h3 lang="es">📄 Exportación</h3>
-            <h3 lang="en">📄 Professional Export</h3>
-            <p lang="es">Comparte tus cálculos en PDF o CSV con un formato profesional listo para presentar.</p>
-            <p lang="en">Share your calculations in PDF or CSV with a professional format ready for presentation.</p>
+        <div class="step-card">
+            <div class="step-num">03</div>
+            <h3 lang="es">Exporta</h3>
+            <h3 lang="en">Export</h3>
+            <p lang="es">Genera informes profesionales en PDF o CSV para presentar en tu banco o compartir con tu
+                pareja.</p>
+            <p lang="en">Generate professional PDF or CSV reports to present at your bank or share with your partner.
+            </p>
+        </div>
+    </section>
+
+    <!-- Comparison -->
+    <section class="plan-comparison">
+        <div class="section-header">
+            <h2 lang="es">Elige tu nivel</h2>
+            <h2 lang="en">Choose your level</h2>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th lang="es">Característica</th>
+                        <th lang="en">Feature</th>
+                        <th lang="es">Gratis</th>
+                        <th lang="en">Free</th>
+                        <th lang="es">PRO (Un solo pago)</th>
+                        <th lang="en">PRO (One-time)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td lang="es">Cálculos Ilimitados</td>
+                        <td lang="en">Unlimited Calculations</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td lang="es">Tablas de Amortización</td>
+                        <td lang="en">Amortization Tables</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td lang="es">Exportar a PDF / CSV</td>
+                        <td lang="en">Export to PDF / CSV</td>
+                        <td lang="es">Limitado</td>
+                        <td lang="en">Limited</td>
+                        <td class="check">✓ Full</td>
+                        <td class="check">✓ Full</td>
+                    </tr>
+                    <tr>
+                        <td lang="es">Publicidad</td>
+                        <td lang="en">Ads</td>
+                        <td lang="es">Sí</td>
+                        <td lang="en">Yes</td>
+                        <td class="cross">✕ No</td>
+                        <td class="cross">✕ No</td>
+                    </tr>
+                    <tr>
+                        <td lang="es">Acceso de por vida</td>
+                        <td lang="en">Lifetime Access</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Trust -->
+    <section class="trust-section">
+        <h2 lang="es">Tus datos son tuyos</h2>
+        <h2 lang="en">Your data stays yours</h2>
+        <p lang="es">Privacidad y seguridad total. Nunca sacamos tus datos financieros de tu dispositivo.</p>
+        <p lang="en">Total privacy and security. We never take your financial data off your device.</p>
+        <div class="trust-grid">
+            <div class="trust-item">
+                <h4 lang="es">100% Privado</h4>
+                <h4 lang="en">100% Private</h4>
+                <p lang="es">Sin registros obligatorios.</p>
+                <p lang="en">No mandatory registration.</p>
+            </div>
+            <div class="trust-item">
+                <h4 lang="es">Sin Nube</h4>
+                <h4 lang="en">No Cloud</h4>
+                <p lang="es">Todo se queda en tu móvil.</p>
+                <p lang="en">Everything stays on your phone.</p>
+            </div>
+            <div class="trust-item">
+                <h4 lang="es">Precisión Bancaria</h4>
+                <h4 lang="en">Bank Precision</h4>
+                <p lang="es">Fórmulas financieras certificadas.</p>
+                <p lang="en">Certified financial formulas.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+        <div class="section-header">
+            <h2 lang="es">Preguntas Frecuentes</h2>
+            <h2 lang="en">Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-item">
+            <h4 lang="es">¿Es gratuita la aplicación?</h4>
+            <h4 lang="en">Is the app free?</h4>
+            <p lang="es">Sí, todas las funcionalidades de cálculo son gratuitas con anuncios. Puedes eliminarlos para
+                siempre con el pago único PRO.</p>
+            <p lang="en">Yes, all core calculation features are free with ads. You can remove them forever with the PRO
+                one-time purchase.</p>
+        </div>
+        <div class="faq-item">
+            <h4 lang="es">¿Cómo se calculan los intereses?</h4>
+            <h4 lang="en">How is interest calculated?</h4>
+            <p lang="es">Utilizamos el sistema de amortización francés (el estándar en la mayoría de bancos) asegurando
+                una precisión del 100%.</p>
+            <p lang="en">We use the French amortization system (the standard in most banks) ensuring 100% precision.</p>
         </div>
     </section>
 
     <footer>
-        <div class="footer-links">
-            <a href="privacy.html">
-                <span lang="es">Privacidad</span>
-                <span lang="en">Privacy</span>
-            </a>
-            <a href="mailto:repotoolsapps@gmail.com">Soporte / Support</a>
+        <a href="#" class="footer-logo">Loan Calc Pro</a>
+        <nav class="footer-nav">
+            <a href="privacy.html"><span lang="es">Privacidad</span><span lang="en">Privacy</span></a>
+            <a href="mailto:repotoolsapps@gmail.com"><span lang="es">Soporte</span><span lang="en">Support</span></a>
+        </nav>
+        <div class="social-links">
+            <!-- Placeholders for icons -->
+            📱
         </div>
         <div class="copy">
-            © 2026 Repotools. 
-            <span lang="es">Calculadora de Préstamos Pro es una marca registrada.</span>
-            <span lang="en">Loan Calculator Pro is a registered trademark.</span>
+            © 2026 Repotools.
+            <span lang="es">Calculadora de Préstamos Pro no es una entidad financiera ni ofrece préstamos.</span>
+            <span lang="en">Loan Calculator Pro is not a financial entity nor does it offer loans.</span>
         </div>
     </footer>
 </body>
